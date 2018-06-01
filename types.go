@@ -610,3 +610,13 @@ func ChangeStruct(structPtr interface{}, changesMap map[string]interface{}) {
 		SetField(structPtr, k, v)
 	}
 }
+
+// ChangeStructMust applies map of changes to struct with error return
+func ChangeStructMust(structPtr interface{}, changesMap map[string]interface{}) error {
+	for k, v := range changesMap {
+		if err := SetField(structPtr, k, v); err != nil {
+			return err
+		}
+	}
+	return nil
+}
